@@ -3,54 +3,23 @@
 # ----------------------------------------------------------------------
 
 <IfModule mod_rewrite.c>
+    Options +FollowSymlinks
     RewriteEngine On
 </IfModule>
 
-# www handling
+# remove www
 <IfModule mod_rewrite.c>
     RewriteCond %{HTTPS} !=on
     RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 </IfModule>
 
-# remove trailing hash
+# force trailing hash
 <IfModule mod_rewrite.c>
-    RewriteRule ^(.*)/$ /$1 [R=301,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/|#(.*))$
+    RewriteRule ^(.*)$ $1/ [R=301,L]
 </IfModule>
-
-
-
-
-# ----------------------------------------------------------------------
-# security & errors
-# ----------------------------------------------------------------------
-
-# error views
-#ErrorDocument 404 /error.html
-
-
-# directories
-Options -Indexes
-
-# hidden directories
-<IfModule mod_rewrite.c>
-    RewriteRule "(^|/)\." - [F]
-</IfModule>
-
-
-# prevent 404 for non-existent directories
-Options -MultiViews
-
-
-# set php register_globals option to off
-php_flag register_globals Off
-
-
-# cookies
-<IfModule php5_module>
-    php_value session.cookie_httponly true
-</IfModule>
-
 
 
 
@@ -78,7 +47,7 @@ php_flag register_globals Off
     <IfModule !mod_filter.c>
         # legacy apache versions
         AddOutputFilterByType DEFLATE text/html text/css text/plain application/json
-        AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript 
+        AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
         AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
     </IfModule>
 
@@ -112,14 +81,16 @@ AddType         font/opentype                       otf
 AddType         application/x-font-woff             woff
 
 # svg
-AddType         image/svg+xml                       svg svgz 
+AddType         image/svg+xml                       svg svgz
 AddEncoding     gzip                                svgz
 
 # media
 AddType         video/ogg                           ogv
 AddType         video/mp4                           mp4
+AddType         video/mp4                           mp4 m4v
 AddType         video/webm                          webm
 AddType         audio/ogg                           oga ogg
+AddType         audio/mp4                           m4a
 
 # other
 AddType         text/cache-manifest                 appcache manifest
@@ -129,6 +100,7 @@ AddType         image/webp                          webp
 AddType         application/x-chrome-extension      crx
 AddType         application/x-xpinstall             xpi
 AddType         application/octet-stream            safariextz
+AddType         text/x-vcard                        vcf
 
 
 
@@ -147,20 +119,20 @@ AddType         application/octet-stream            safariextz
 #    ExpiresByType text/cache-manifest           "access plus 0 seconds"
 
 #    ExpiresByType text/html                     "access plus 0 seconds"
-#    
+#
 #    ExpiresByType text/xml                      "access plus 0 seconds"
 #    ExpiresByType application/json              "access plus 0 seconds"
 #    ExpiresByType application/xml               "access plus 0 seconds"
-    
+
 #    ExpiresByType application/rss+xml           "access plus 1 hour"
-    
+
     # favicon
-#    ExpiresByType image/x-icon                  "access plus 1 week" 
+#    ExpiresByType image/x-icon                  "access plus 1 week"
 
     # css & js
-#    ExpiresByType text/css                      "access plus 1 month"
-#    ExpiresByType text/javascript               "access plus 1 month"
-#    ExpiresByType application/javascript        "access plus 1 month"
+#    ExpiresByType text/css                      "access plus 1 year"
+#    ExpiresByType text/javascript               "access plus 1 year"
+#    ExpiresByType application/javascript        "access plus 1 year"
 
     # media
 #    ExpiresByType image/png                     "access plus 1 month"
@@ -171,7 +143,7 @@ AddType         application/octet-stream            safariextz
 #    ExpiresByType video/webm                    "access plus 1 month"
 #    ExpiresByType video/ogg                     "access plus 1 month"
 #    ExpiresByType audio/ogg                     "access plus 1 month"
-  
+
     # webfonts
 #    ExpiresByType font/truetype                 "access plus 1 month"
 #    ExpiresByType font/opentype                 "access plus 1 month"
@@ -194,36 +166,10 @@ AddType         application/octet-stream            safariextz
 # etag
 # ----------------------------------------------------------------------
 
-FileETag None
-
-
-
-
-# ----------------------------------------------------------------------
-# filename-based cache busting
-# ----------------------------------------------------------------------
-
-# will route requests for /css/style.0000.css to /css/style.css
-#<IfModule mod_rewrite.c>
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#    RewriteRule ^(.+)\.(\d+)\.(css|js|png|jpg|gif)$ $1.$3 [L]
-#</IfModule>
-
-
-
-
-# ----------------------------------------------------------------------
-# css & js concatenation
-# ----------------------------------------------------------------------
-
-# inside of script.concat.js you could have
-# <!--#include file="libs/jquery-1.5.0.min.js" -->
-
-#<FilesMatch "\.concat\.(js|css)$">
-#    Options +Includes
-#    SetOutputFilter INCLUDES
-#</FilesMatch>
+<IfModule mod_headers.c>
+    Header unset ETag
+    Header append Vary User-Agent
+</IfModule>
 
 
 
@@ -246,7 +192,7 @@ FileETag None
 # force application download
 # ----------------------------------------------------------------------
 
-#AddType application/octet-stream .dmg
+AddType application/octet-stream .zip
 
 
 

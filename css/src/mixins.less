@@ -1,0 +1,111 @@
+/*  ICONS
+-------------------------------------------------------------------------- */
+.icon(@w, @h, @x, @y) { width: @w; height: @h; background: url('@{path}icons.png') @x @y no-repeat; display: block; text-indent: -9999px; }
+.icon-after(@w, @h, @x, @y, @top) {
+    position: relative;
+    &:after { .icon(@w, @h, @x, @y); content: ''; position: absolute; top: @top; right: ; }
+}
+
+
+
+
+/*
+-------------------------------------------------------------------------- */
+
+
+
+
+
+/*  ANIMATIONS
+-------------------------------------------------------------------------- */
+
+
+
+
+
+/*  HELPERS
+-------------------------------------------------------------------------- */
+.center { margin: auto; }
+
+
+.cf-pseudo { content: ''; display: table; }
+.cf {
+    zoom: 1;
+    .cf-pseudo;
+    &:after { clear: both; }
+}
+
+
+.click { cursor: pointer !important; }
+
+
+.hidden { display: none !important; visibility: hidden; }
+.hidden-vis { width: 1px !important; height: 1px !important; border: 0 !important; clip: rect(0 0 0 0); margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; }
+
+
+.ir { background-color: transparent; background-repeat: no-repeat; display: block; border: 0; overflow: hidden; text-align: left; text-indent: -9999px;  }
+.ir br { display: none; }
+
+
+
+
+/*  BROWSER PREFIXES
+-------------------------------------------------------------------------- */
+.background-size(@val: cover) {
+    -webkit-background-size: @val;
+       -moz-background-size: @val;
+         -o-background-size: @val;
+            background-size: @val;
+}
+
+
+.border-radius(@val: 0) {
+    -webkit-border-radius: @val;
+       -moz-border-radius: @val;
+            border-radius: @val;
+}
+
+
+.box-shadow(@x: 0, @y: 0, @blur: 0, @spread: 0, @r: 0, @g: 0, @b: 0, @a: 0) {
+    -webkit-box-shadow: @x @y @blur @spread rgba(@r,@g,@b,@a);
+       -moz-box-shadow: @x @y @blur @spread rgba(@r,@g,@b,@a);
+         -o-box-shadow: @x @y @blur @spread rgba(@r,@g,@b,@a);
+            box-shadow: @x @y @blur @spread rgba(@r,@g,@b,@a);
+}
+
+
+.box-sizing(@val: border-box) {
+    -webkit-box-sizing: @val;
+       -moz-box-sizing: @val;
+            box-sizing: @val;
+}
+
+
+.cols(@col-w, @count, @gap) {
+    -webkit-columns: @col-w @count;
+       -moz-columns: @col-w @count;
+            columns: @col-w @count;
+    -webkit-column-gap: @gap;
+       -moz-column-gap: @gap;
+            column-gap: @gap;
+}
+
+
+.opacity(@alpha) {
+    opacity: @alpha;
+    //filter:alpha(opacity=@alpha * 100);
+}
+
+
+.placeholder(@color) {
+    ::-webkit-input-placeholder { color: @color; }
+    :-moz-placeholder { color: @color; }
+}
+
+
+.transition(@duration: 250ms) {
+    -webkit-transition: all @duration ease-in-out;
+       -moz-transition: all @duration ease-in-out;
+         -o-transition: all @duration ease-in-out;
+            transition: all @duration ease-in-out;
+}

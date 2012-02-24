@@ -1,0 +1,81 @@
+@import "reset";
+@import "variables";
+@import "mixins";
+
+
+
+
+/*  BASE
+-------------------------------------------------------------------------- */
+body, input, textarea, select, button { color: @text; font: 12px/1 'helvetica neue', arial, sans-serif; }
+nav ul { list-style: none; }
+h1, h2, h3, h4, h5, h6 { color: @heading; font-weight: normal; }
+
+
+
+
+/*  STYLES
+-------------------------------------------------------------------------- */
+
+
+
+
+
+/*  FORMS
+-------------------------------------------------------------------------- */
+label,
+button { cursor: pointer; }
+
+
+
+
+/*  MEDIA QUERIES
+-------------------------------------------------------------------------- */
+/*  IPAD - PORTRAIT  */
+@media only screen and (max-width: 768px) {
+
+}
+
+/*  MOBILE  */
+@media only screen and (max-width: 480px) {
+
+}
+
+
+
+
+/*  SCROLLBARS
+-------------------------------------------------------------------------- */
+::-webkit-scrollbar { width: 15px; }
+::-webkit-scrollbar-track { background: #2d2f30;}
+::-webkit-scrollbar-thumb { background: #4e5558; }
+.ie { scrollbar-track-color: #d5d5d5; scrollbar-face-color: #aaa; scrollbar-highlight-color: #aaa; scrollbar-shadow-color: #aaa; scrollbar-darkshadow-color: #aaa; scrollbar-3dlight-color: #aaa; scrollbar-base-color: #aaa; scrollbar-arrow-color: #fff; }
+
+
+
+
+/*  SELECTION
+-------------------------------------------------------------------------- */
+::-moz-selection { background: #; color: #; text-shadow: none; }
+::selection { background: #; color: #; text-shadow: none; }
+a:link { -webkit-tap-highlight-color: #; }
+:focus { outline-offset: -1px; }
+
+
+
+
+/*  WEBFONTS
+-------------------------------------------------------------------------- */
+@font-face {
+      font-family: ''; font-style: normal; font-weight: normal;
+      src: url('font/.eot');
+      src: url('font/.eot?') format('eot'),
+           url('font/.woff') format('woff'),
+           url('font/.ttf') format('truetype'),
+           url('font/.svg#') format('svg');
+}
+
+
+
+
+@import "utility";

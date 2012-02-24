@@ -1,20 +1,27 @@
 /*  RESET
 -------------------------------------------------------------------------- */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-code, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li, fieldset, form,
-label, table, tbody, tfoot, thead, tr, th, td, audio, video, a
-{ border: 0; font: inherit; font-size: 100%; margin: 0; padding: 0; vertical-align: baseline; }
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite,
+code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, hr,
+fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video
+{ background: transparent; border: 0; font-size: 100%; margin: 0; padding: 0; vertical-align: baseline; }
+
+html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
 
 img { display: block; }
 
-input, select, textarea, button { margin: 0; }
-label, button { cursor: pointer; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+input, textarea, select, button { border: 0; margin: 0; }
 input, select { vertical-align: middle; }
 input[type="checkbox"] { vertical-align: bottom; }
 input[type="radio"] { vertical-align: text-bottom; }
-textarea { border: 0; overflow: auto; }
-
-table { border-collapse: collapse; border-spacing: 0; }
+textarea { border: 0; overflow: auto; resize: vertical; vertical-align: top; }
 
 sub, sup { font-size: 75%; line-height: 0; position: relative; }
 sup { top: -0.5em; }
@@ -25,14 +32,17 @@ sub { bottom: -0.25em; }
 
 
 
-/*  ELEMENTS
+/*  BASE
 -------------------------------------------------------------------------- */
-body, select, input, textarea { color: #; font: px/normal serif; }
+body, input, textarea, select, button { color: #; font: px/1 serif; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+nav ul { list-style: none; }
+p { line-height: 1.35; }
 
 
 
 
-/*  GLOBAL
+/*  STYLES
 -------------------------------------------------------------------------- */
 
 
@@ -40,6 +50,42 @@ body, select, input, textarea { color: #; font: px/normal serif; }
 
 
 /*  FORMS
+-------------------------------------------------------------------------- */
+label,
+button { cursor: pointer; }
+
+
+
+
+
+
+/*  MEDIA QUERIES
+-------------------------------------------------------------------------- */
+/*  IPAD - PORTRAIT  */
+@media only screen and (max-width: 768px) {
+
+}
+
+/*  MOBILE  */
+@media only screen and (max-width: 480px) {
+
+}
+
+
+
+
+
+
+/*  ANIMATIONS
+-------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+/*  WEBFONTS
 -------------------------------------------------------------------------- */
 
 
@@ -50,16 +96,23 @@ body, select, input, textarea { color: #; font: px/normal serif; }
 
 /*  ACCESSIBILITY
 -------------------------------------------------------------------------- */
-a:hover, a:active { outline: none; }
+a:focus { outline: thin dotted; }
+a:hover,
+a:active { outline: 0; }
+
+
 
 
 
 
 /*  SELECTION
 -------------------------------------------------------------------------- */
-::-moz-selection{ background: #; color: #; text-shadow: none; }
-::selection { background: #; color:#; text-shadow: none; }
+::-moz-selection { background: #; color: #; text-shadow: none; }
+::selection { background: #; color: #; text-shadow: none; }
 a:link { -webkit-tap-highlight-color: #; }
+:focus { outline-offset: -1px; }
+
+
 
 
 
@@ -76,24 +129,23 @@ button::-moz-focus-inner { border: 0; padding: 0; }
 
 
 
-/*  NON-SEMANTIC CLASSES
+
+
+/*  HELPER CLASSES
 -------------------------------------------------------------------------- */
 /*  CLEARFIX  */
-.clearfix:before,
-.clearfix:after { content: "\0020"; height: 0; display: block; overflow: hidden; }
-.clearfix:after { clear: both; }
-.ielt9 .clearfix { zoom: 1; }
-
+.cf:before,
+.cf:after { content: ''; display: table; }
+.cf:after { clear: both; }
+.ie7 .cf { zoom: 1; }
 
 /*  IMAGE REPLACEMENT  */
-.ir { background-repeat: no-repeat; display: block; overflow: hidden; text-align: left; text-indent: -9999px;  }
-
+.ir { background-color: transparent; background-repeat: no-repeat; display: block; border: 0; overflow: hidden; text-align: left; text-indent: -9999px;  }
+.ir br { display: none; }
 
 /*  HIDE  */
-.hidden { display: none; visibility: hidden; }
-.hidden_vis { width: 1px !important; height: 1px !important; border: 0 !important; clip: rect(0 0 0 0); margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; }
-
-
+.hidden { display: none !important; visibility: hidden; }
+.hidden-vis { width: 1px !important; height: 1px !important; border: 0 !important; clip: rect(0 0 0 0); margin: -1px !important; overflow: hidden !important; padding: 0 !important; position: absolute !important; }
 
 
 
@@ -107,12 +159,13 @@ button::-moz-focus-inner { border: 0; padding: 0; }
     * { background: transparent !important; color: black !important; text-shadow: none !important;
             filter: none !important;
         -ms-filter: none !important; }
-    thead { display: table-header-group; }
-    tr, img { page-break-inside: avoid; }
     h2, h3, p { orphans: 3; widows: 3; }
-    h2, h3{ page-break-after: avoid; }
+    h2, h3 { page-break-after: avoid; }
     a, a:visited { color: #444 !important; text-decoration: underline; }
     a[href]:after { content: " (" attr(href) ")"; }
+    img { max-width: 100% !important; }
+    img, tr { page-break-inside: avoid; }
+    thead { display: table-header-group; }
     .ir a:after,a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
     pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
     abbr[title]:after { content: " (" attr(title) ")"; }
